@@ -1,0 +1,207 @@
+# =============================================================================
+# TAXPAYER PROFILE - 2025 Tax Year
+# =============================================================================
+# This file is filled out by the /tax-prep command in OpenCode.
+# 
+# SENSITIVE DATA:
+# - Fields marked with $ENV_* are placeholders for sensitive data
+# - These reference values in your .env file
+# - You'll manually replace these placeholders in final documents
+# - The AI NEVER sees your actual SSN, bank info, etc.
+# =============================================================================
+
+# -----------------------------------------------------------------------------
+# FILING STATUS
+# -----------------------------------------------------------------------------
+# Options: single, married_joint, married_separate, head_of_household, qualifying_surviving_spouse
+filing_status: ""
+
+# -----------------------------------------------------------------------------
+# PRIMARY TAXPAYER
+# -----------------------------------------------------------------------------
+taxpayer:
+  first_name: ""
+  middle_initial: ""
+  last_name: ""
+  ssn: "$TAXPAYER_SSN"           # Placeholder - fill from .env
+  date_of_birth: ""              # Format: YYYY-MM-DD
+  occupation: ""
+  phone: ""
+  email: ""
+  
+  # Presidential Election Campaign Fund (check if you want $3 to go to fund)
+  presidential_campaign_fund: false
+  
+  # Digital Assets Question (did you receive, sell, or dispose of digital assets?)
+  digital_assets: false
+
+# -----------------------------------------------------------------------------
+# SPOUSE (if married filing jointly or separately)
+# -----------------------------------------------------------------------------
+spouse:
+  first_name: ""
+  middle_initial: ""
+  last_name: ""
+  ssn: "$SPOUSE_SSN"             # Placeholder - fill from .env
+  date_of_birth: ""
+  occupation: ""
+  
+  presidential_campaign_fund: false
+
+# -----------------------------------------------------------------------------
+# ADDRESS
+# -----------------------------------------------------------------------------
+address:
+  street: ""
+  apartment: ""
+  city: ""
+  state: ""                      # Two-letter code (e.g., CA, NY, TX)
+  zip: ""
+  country: "USA"
+  
+  lived_here_all_year: true
+  main_home_in_us: true
+
+# -----------------------------------------------------------------------------
+# DEPENDENTS
+# -----------------------------------------------------------------------------
+# The AI will help you fill this out. SSNs use placeholders.
+dependents: []
+  # Example:
+  # - first_name: "Jane"
+  #   last_name: "Doe"
+  #   ssn: "$DEPENDENT_1_SSN"    # Placeholder - fill from .env
+  #   relationship: "daughter"
+  #   date_of_birth: "2015-06-15"
+  #   months_lived_with_you: 12
+  #   qualifies_for_ctc: true
+  #   qualifies_for_odc: false
+  #   qualifies_for_eic: true
+
+# -----------------------------------------------------------------------------
+# BANK INFORMATION (for direct deposit refund)
+# -----------------------------------------------------------------------------
+# All bank info uses placeholders - fill from .env manually
+bank_info:
+  routing_number: "$BANK_ROUTING_NUMBER"
+  account_number: "$BANK_ACCOUNT_NUMBER"
+  account_type: "$BANK_ACCOUNT_TYPE"
+  
+  split_refund: false
+
+# -----------------------------------------------------------------------------
+# ESTIMATED TAX PAYMENTS MADE DURING 2025
+# -----------------------------------------------------------------------------
+estimated_payments: []
+  # - date: "2025-04-15"
+  #   amount: 1000
+
+refund_applied_from_prior_year: 0
+
+# -----------------------------------------------------------------------------
+# PRIOR YEAR INFORMATION
+# -----------------------------------------------------------------------------
+prior_year:
+  agi_2024: "$PRIOR_YEAR_AGI"    # Placeholder - needed for e-file verification
+  total_tax_2024: 0
+  itemized_2024: false
+  
+  capital_loss_carryover:
+    short_term: 0
+    long_term: 0
+
+# -----------------------------------------------------------------------------
+# SPECIAL SITUATIONS
+# -----------------------------------------------------------------------------
+special_situations:
+  taxpayer_blind: false
+  spouse_blind: false
+  taxpayer_student: false
+  spouse_student: false
+  claimed_as_dependent: false
+  spouse_died_year: null
+  had_foreign_accounts: false
+  foreign_account_value_exceeded_10000: false
+  had_marketplace_insurance: false
+  had_health_coverage_all_year: true
+  self_employed: false
+  had_household_employees: false
+  
+  # IP PINs use placeholders
+  ip_pin_taxpayer: "$TAXPAYER_IP_PIN"
+  ip_pin_spouse: "$SPOUSE_IP_PIN"
+
+# -----------------------------------------------------------------------------
+# DEDUCTION PREFERENCE
+# -----------------------------------------------------------------------------
+deduction_method: auto          # auto, standard, or itemized
+
+# -----------------------------------------------------------------------------
+# INCOME SUMMARY (filled by AI from documents)
+# -----------------------------------------------------------------------------
+income:
+  wages: 0                       # From W-2s
+  interest: 0                    # From 1099-INT
+  dividends:
+    ordinary: 0
+    qualified: 0
+  capital_gains:
+    short_term: 0
+    long_term: 0
+  self_employment: 0             # From Schedule C
+  rental: 0                      # From Schedule E
+  retirement_distributions: 0    # From 1099-R
+  social_security: 0             # From SSA-1099
+  other: 0
+
+# -----------------------------------------------------------------------------
+# DEDUCTIONS SUMMARY (filled by AI from documents)
+# -----------------------------------------------------------------------------
+deductions:
+  # Itemized
+  state_local_taxes: 0           # Capped at $10,000
+  mortgage_interest: 0           # From 1098
+  charitable_cash: 0
+  charitable_noncash: 0
+  medical_expenses: 0            # Only amount over 7.5% AGI
+  
+  # Above-the-line (adjustments)
+  student_loan_interest: 0
+  educator_expenses: 0
+  hsa_contributions: 0
+  self_employment_tax_deduction: 0
+  self_employed_health_insurance: 0
+  ira_contributions: 0
+
+# -----------------------------------------------------------------------------
+# CREDITS (filled by AI based on eligibility)
+# -----------------------------------------------------------------------------
+credits:
+  child_tax_credit: 0
+  other_dependent_credit: 0
+  earned_income_credit: 0
+  child_care_credit: 0
+  education_credits: 0
+  retirement_savings_credit: 0
+  energy_credits: 0
+  clean_vehicle_credit: 0
+
+# -----------------------------------------------------------------------------
+# STATE RETURN
+# -----------------------------------------------------------------------------
+state_return:
+  file_state_return: true
+  state: ""
+
+# -----------------------------------------------------------------------------
+# PAYMENT PREFERENCE (if you owe)
+# -----------------------------------------------------------------------------
+payment_preference:
+  method: ""                     # direct_debit, check, installment_plan
+  debit_date: ""
+
+# -----------------------------------------------------------------------------
+# NOTES
+# -----------------------------------------------------------------------------
+notes: |
+  

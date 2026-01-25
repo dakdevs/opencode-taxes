@@ -1,0 +1,62 @@
+# ===========================================
+# TAX PREPARATION - SENSITIVE DATA EXCLUSIONS
+# ===========================================
+
+# User's tax documents (NEVER commit actual documents)
+user-documents/**/*
+!user-documents/**/
+!user-documents/**/.gitkeep
+!user-documents/**/README.md
+
+# Sensitive data (SSN, bank info) - NEVER commit
+.env
+
+# User's filled personal information (the template is tracked)
+# taxpayer-profile.yaml is tracked as a template with placeholders
+
+# Generated output forms (contain personal data)
+output/*
+!output/.gitkeep
+
+# ===========================================
+# GENERAL EXCLUSIONS
+# ===========================================
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# Linux
+*~
+
+# Editor files
+*.swp
+*.swo
+*.swn
+.idea/
+.vscode/
+*.sublime-project
+*.sublime-workspace
+
+# Temporary files
+*.tmp
+*.temp
+*.bak
+*.backup
+
+# Log files
+*.log
+
+# ===========================================
+# EXAMPLE/TEMPLATE FILES TO INCLUDE
+# ===========================================
+
+# Include example templates (remove ! to exclude)
+!taxpayer-profile.example.yaml

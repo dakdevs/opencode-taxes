@@ -1,0 +1,610 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>OpenCode Taxes</title>
+  <style>
+    :root {
+      --accent: #22c55e;
+      --accent-dim: #16a34a;
+      --bg: #0a0a0a;
+      --bg-alt: #111111;
+      --bg-card: #161616;
+      --border: #262626;
+      --text: #e5e5e5;
+      --text-muted: #737373;
+      --danger: #ef4444;
+      --danger-bg: #1c0a0a;
+      --danger-border: #7f1d1d;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'SF Mono', 'Monaco', 'Inconsolata', 'Fira Code', 'Fira Mono', 'Roboto Mono', 'Consolas', monospace;
+      line-height: 1.6;
+      color: var(--text);
+      background: var(--bg);
+      font-size: 14px;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* Header */
+    header {
+      padding: 20px 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    header .container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      color: var(--accent);
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    .logo::before {
+      content: '> ';
+      color: var(--text-muted);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 24px;
+    }
+
+    .nav-links a {
+      color: var(--text-muted);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover {
+      color: var(--accent);
+    }
+
+    /* Hero */
+    .hero {
+      padding: 80px 0 60px;
+    }
+
+    .hero h1 {
+      font-size: 2rem;
+      font-weight: 600;
+      margin-bottom: 16px;
+      color: var(--text);
+    }
+
+    .hero h1 span {
+      color: var(--accent);
+    }
+
+    .hero .subtitle {
+      color: var(--text-muted);
+      margin-bottom: 32px;
+      max-width: 600px;
+    }
+
+    .badge {
+      display: inline-block;
+      background: var(--bg-alt);
+      border: 1px solid var(--border);
+      padding: 6px 12px;
+      font-size: 12px;
+      color: var(--text-muted);
+      margin-bottom: 24px;
+    }
+
+    .badge::before {
+      content: '// ';
+      color: var(--accent-dim);
+    }
+
+    .cta-buttons {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 20px;
+      font-family: inherit;
+      font-size: 14px;
+      text-decoration: none;
+      transition: all 0.2s;
+      border: 1px solid var(--border);
+    }
+
+    .btn-primary {
+      background: var(--accent);
+      color: var(--bg);
+      border-color: var(--accent);
+    }
+
+    .btn-primary:hover {
+      background: var(--accent-dim);
+      border-color: var(--accent-dim);
+    }
+
+    .btn-secondary {
+      background: transparent;
+      color: var(--text);
+    }
+
+    .btn-secondary:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+
+    /* Warning Banner */
+    .warning {
+      background: var(--danger-bg);
+      border: 1px solid var(--danger-border);
+      padding: 16px 20px;
+      margin: 40px 0;
+    }
+
+    .warning-title {
+      color: var(--danger);
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-bottom: 8px;
+    }
+
+    .warning-title::before {
+      content: '! ';
+    }
+
+    .warning p {
+      color: #fca5a5;
+      font-size: 13px;
+    }
+
+    .warning-list {
+      color: #fca5a5;
+      font-size: 13px;
+      margin: 12px 0;
+      padding-left: 20px;
+    }
+
+    .warning-list li {
+      margin-bottom: 8px;
+    }
+
+    .warning-list code {
+      background: rgba(127, 29, 29, 0.5);
+      padding: 2px 6px;
+      color: #fca5a5;
+    }
+
+    .warning strong {
+      color: #fecaca;
+    }
+
+    /* Features */
+    .features {
+      padding: 60px 0;
+      border-top: 1px solid var(--border);
+    }
+
+    .section-title {
+      color: var(--text-muted);
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-bottom: 32px;
+    }
+
+    .section-title::before {
+      content: '## ';
+      color: var(--accent);
+    }
+
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 16px;
+    }
+
+    .feature-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      padding: 20px;
+    }
+
+    .feature-card h3 {
+      font-size: 14px;
+      margin-bottom: 8px;
+      color: var(--text);
+    }
+
+    .feature-card h3::before {
+      content: '> ';
+      color: var(--accent);
+    }
+
+    .feature-card p {
+      color: var(--text-muted);
+      font-size: 13px;
+    }
+
+    /* How it works */
+    .how-it-works {
+      padding: 60px 0;
+      border-top: 1px solid var(--border);
+    }
+
+    .steps {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 24px;
+    }
+
+    .step {
+      padding: 20px;
+      border: 1px solid var(--border);
+      background: var(--bg-card);
+    }
+
+    .step-number {
+      color: var(--accent);
+      font-size: 12px;
+      margin-bottom: 12px;
+    }
+
+    .step h3 {
+      font-size: 14px;
+      margin-bottom: 8px;
+      color: var(--text);
+    }
+
+    .step p {
+      color: var(--text-muted);
+      font-size: 13px;
+    }
+
+    /* Code block */
+    .code-section {
+      padding: 60px 0;
+      border-top: 1px solid var(--border);
+    }
+
+    .code-block {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      padding: 24px;
+      overflow-x: auto;
+    }
+
+    .code-block pre {
+      color: var(--text);
+      font-size: 13px;
+      line-height: 2;
+    }
+
+    .code-block .comment {
+      color: var(--text-muted);
+    }
+
+    .code-block .command {
+      color: var(--accent);
+    }
+
+    .code-block .prompt::before {
+      content: '$ ';
+      color: var(--text-muted);
+    }
+
+    /* Security */
+    .security {
+      padding: 60px 0;
+      border-top: 1px solid var(--border);
+    }
+
+    .security-table {
+      border: 1px solid var(--border);
+      overflow: hidden;
+    }
+
+    .security-table table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    .security-table th,
+    .security-table td {
+      padding: 12px 16px;
+      text-align: left;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .security-table th {
+      background: var(--bg-card);
+      font-weight: 600;
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--text-muted);
+    }
+
+    .security-table tr:last-child td {
+      border-bottom: none;
+    }
+
+    .security-table td {
+      font-size: 13px;
+    }
+
+    .security-table code {
+      color: var(--accent);
+      background: var(--bg-alt);
+      padding: 2px 6px;
+    }
+
+    .badge-safe {
+      color: var(--accent);
+      font-size: 12px;
+    }
+
+    .badge-safe::before {
+      content: '✓ ';
+    }
+
+    .badge-yes {
+      color: var(--text-muted);
+      font-size: 12px;
+    }
+
+    /* Footer */
+    footer {
+      padding: 40px 0;
+      border-top: 1px solid var(--border);
+    }
+
+    footer p {
+      color: var(--text-muted);
+      font-size: 12px;
+      margin-bottom: 16px;
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 24px;
+      flex-wrap: wrap;
+    }
+
+    .footer-links a {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 12px;
+    }
+
+    .footer-links a:hover {
+      color: var(--accent);
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .hero h1 {
+        font-size: 1.5rem;
+      }
+
+      header .container {
+        flex-direction: column;
+        gap: 16px;
+      }
+
+      .nav-links {
+        gap: 16px;
+      }
+    }
+
+    /* Cursor blink */
+    .cursor {
+      display: inline-block;
+      width: 8px;
+      height: 1.2em;
+      background: var(--accent);
+      margin-left: 4px;
+      animation: blink 1s step-end infinite;
+      vertical-align: text-bottom;
+    }
+
+    @keyframes blink {
+      50% { opacity: 0; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container">
+      <a href="#" class="logo">opencode-taxes</a>
+      <nav class="nav-links">
+        <a href="https://github.com/opencode-ai/opencode" target="_blank">opencode</a>
+        <a href="https://www.irs.gov" target="_blank">irs.gov</a>
+        <a href="https://github.com/dakdevs/opencode-taxes" target="_blank">github</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="container">
+        <div class="badge">tax-year: 2025 | filed: 2026</div>
+        <h1>AI-Assisted <span>Tax Preparation</span><span class="cursor"></span></h1>
+        <p class="subtitle">Prepare your federal tax return with AI assistance using OpenCode. Secure, local-first, and fully transparent.</p>
+        <div class="cta-buttons">
+          <a href="https://github.com/dakdevs/opencode-taxes" class="btn btn-primary">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+            clone repo
+          </a>
+          <a href="#how-it-works" class="btn btn-secondary">--help</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="container">
+      <div class="warning">
+        <div class="warning-title">disclaimer: use at your own risk</div>
+        <p>This project is an <strong>experimental proof-of-concept</strong> and is provided "as is" without warranty of any kind. By using this software, you acknowledge and agree that:</p>
+        <ul class="warning-list">
+          <li><strong>This is NOT tax advice.</strong> I am not a CPA, tax attorney, or financial advisor.</li>
+          <li><strong>I accept ZERO liability</strong> for any errors, omissions, inaccuracies, or consequences resulting from use of this software.</li>
+          <li><strong>You are solely responsible</strong> for the accuracy and legality of your tax return.</li>
+          <li><strong>AI can make mistakes.</strong> All calculations and recommendations must be independently verified.</li>
+          <li><strong>Consult a qualified tax professional</strong> for your specific situation.</li>
+          <li><strong>The IRS holds YOU accountable</strong> for your tax return, not this software or its creator.</li>
+          <li><strong>Sensitive information may be shared with third parties.</strong> Your tax documents, personal information, and other data you provide may be transmitted to AI model providers (such as Anthropic, OpenAI, or others). We have made best efforts to keep highly sensitive details (SSN, bank account numbers) local in <code>.env</code> and out of AI processing, but <strong>there is no guarantee</strong> that sensitive information won't be transmitted to third-party services.</li>
+        </ul>
+        <p>This project is for <strong>educational and experimental purposes only</strong>. If you choose to use any output from this system for actual tax filing, you do so entirely at your own risk.</p>
+      </div>
+    </section>
+
+    <section class="features">
+      <div class="container">
+        <div class="section-title">features</div>
+        <div class="features-grid">
+          <div class="feature-card">
+            <h3>privacy-first</h3>
+            <p>SSN and bank info stay local in .env files. Sensitive data never touches the AI.</p>
+          </div>
+          <div class="feature-card">
+            <h3>ai-powered</h3>
+            <p>Specialist agents handle income processing, deduction analysis, credit evaluation.</p>
+          </div>
+          <div class="feature-card">
+            <h3>52-irs-forms</h3>
+            <p>Form 1040, all schedules, and common credit forms. Generate filing-ready PDFs.</p>
+          </div>
+          <div class="feature-card">
+            <h3>pub-17-indexed</h3>
+            <p>Complete IRS Publication 17 converted to searchable markdown.</p>
+          </div>
+          <div class="feature-card">
+            <h3>deterministic-math</h3>
+            <p>Tax brackets and credits calculated by scripts—not hallucinating AI.</p>
+          </div>
+          <div class="feature-card">
+            <h3>open-source</h3>
+            <p>Review every calculation. Verify against IRS publications before filing.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="how-it-works" id="how-it-works">
+      <div class="container">
+        <div class="section-title">workflow</div>
+        <div class="steps">
+          <div class="step">
+            <div class="step-number">[0]</div>
+            <h3>fork && clone</h3>
+            <p>Create a private fork to keep your tax data secure.</p>
+          </div>
+          <div class="step">
+            <div class="step-number">[1]</div>
+            <h3>upload docs</h3>
+            <p>Add your W-2s, 1099s, and other tax documents.</p>
+          </div>
+          <div class="step">
+            <div class="step-number">[2]</div>
+            <h3>/tax-prep</h3>
+            <p>AI guides you through the entire preparation workflow.</p>
+          </div>
+          <div class="step">
+            <div class="step-number">[3]</div>
+            <h3>generate pdfs</h3>
+            <p>Export filing-ready IRS forms with your data filled in.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="code-section">
+      <div class="container">
+        <div class="section-title">quick-start</div>
+        <div class="code-block">
+<pre><span class="comment"># install opencode</span>
+<span class="prompt"><span class="command">curl -fsSL https://opencode.ai/install | bash</span></span>
+
+<span class="comment"># clone your private fork</span>
+<span class="prompt"><span class="command">git clone https://github.com/dakdevs/opencode-taxes.git</span></span>
+<span class="prompt"><span class="command">cd opencode-taxes</span></span>
+
+<span class="comment"># set up sensitive data (never sent to AI)</span>
+<span class="prompt"><span class="command">cp .env.example .env</span></span>
+
+<span class="comment"># start opencode and run the workflow</span>
+<span class="prompt"><span class="command">opencode</span></span>
+<span class="prompt"><span class="command">/tax-prep</span></span></pre>
+        </div>
+      </div>
+    </section>
+
+    <section class="security">
+      <div class="container">
+        <div class="section-title">security-model</div>
+        <div class="security-table">
+          <table>
+            <thead>
+              <tr>
+                <th>data</th>
+                <th>location</th>
+                <th>sent to ai?</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>SSN, Bank Account</td>
+                <td><code>.env</code></td>
+                <td><span class="badge-safe">never</span></td>
+              </tr>
+              <tr>
+                <td>Name, Address, DOB</td>
+                <td><code>taxpayer-profile.yaml</code></td>
+                <td><span class="badge-yes">yes (for processing)</span></td>
+              </tr>
+              <tr>
+                <td>Tax Documents</td>
+                <td><code>user-documents/</code></td>
+                <td><span class="badge-yes">yes (for processing)</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      <p>// experimental. educational purposes only. not tax advice.</p>
+      <div class="footer-links">
+        <a href="https://github.com/opencode-ai/opencode" target="_blank">opencode</a>
+        <a href="https://www.irs.gov" target="_blank">irs.gov</a>
+        <a href="https://www.irs.gov/publications/p17" target="_blank">pub-17</a>
+        <a href="https://www.irs.gov/refunds" target="_blank">refund-status</a>
+        <a href="https://www.irs.gov/filing/free-file-do-your-federal-taxes-for-free" target="_blank">free-file</a>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>
